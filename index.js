@@ -66,7 +66,7 @@ const ScrollableTabView = createReactClass({
     let positionAndroid;
     let offsetAndroid;
 
-    if (Platform.OS === 'ios') {
+    // if (Platform.OS === 'ios') {
       scrollXIOS = new Animated.Value(this.props.initialPage * containerWidth);
       const containerWidthAnimatedValue = new Animated.Value(containerWidth);
       // Need to call __makeNative manually to avoid a native animated bug. See
@@ -78,23 +78,23 @@ const ScrollableTabView = createReactClass({
       scrollXIOS.addListener(
         ({ value, }) => callListeners(value / this.state.containerWidth)
       );
-    } else {
-      positionAndroid = new Animated.Value(this.props.initialPage);
-      offsetAndroid = new Animated.Value(0);
-      scrollValue = Animated.add(positionAndroid, offsetAndroid);
+    // } else {
+    //   positionAndroid = new Animated.Value(this.props.initialPage);
+    //   offsetAndroid = new Animated.Value(0);
+    //   scrollValue = Animated.add(positionAndroid, offsetAndroid);
 
-      const callListeners = this._polyfillAnimatedValue(scrollValue);
-      let positionAndroidValue = this.props.initialPage;
-      let offsetAndroidValue = 0;
-      positionAndroid.addListener(({ value, }) => {
-        positionAndroidValue = value;
-        callListeners(positionAndroidValue + offsetAndroidValue);
-      });
-      offsetAndroid.addListener(({ value, }) => {
-        offsetAndroidValue = value;
-        callListeners(positionAndroidValue + offsetAndroidValue);
-      });
-    }
+    //   const callListeners = this._polyfillAnimatedValue(scrollValue);
+    //   let positionAndroidValue = this.props.initialPage;
+    //   let offsetAndroidValue = 0;
+    //   positionAndroid.addListener(({ value, }) => {
+    //     positionAndroidValue = value;
+    //     callListeners(positionAndroidValue + offsetAndroidValue);
+    //   });
+    //   offsetAndroid.addListener(({ value, }) => {
+    //     offsetAndroidValue = value;
+    //     callListeners(positionAndroidValue + offsetAndroidValue);
+    //   });
+    // }
 
     return {
       currentPage: this.props.initialPage,
